@@ -26,6 +26,8 @@ import swing2swt.layout.BorderLayout;
 
 import com.kelmer.formats.resource.image.express.bg.BGImage;
 import com.kelmer.formats.resource.image.holmes.rrm.RRMImage;
+import com.kelmer.formats.resource.image.sword.swordbg.SWRDImage;
+import com.kelmer.formats.resource.palette.Palette256;
 import com.kelmer.view.buttonBar.NavigationButtonBar;
 import com.kelmer.view.imageViewer.ImageViewerPanel;
 import com.kelmer.view.tree.FileTree;
@@ -205,6 +207,18 @@ public class MainWindow {
                             }
                             else if (FilenameUtils.getExtension(f.getName()).equals("BG")) {
                                 MainWindow.this.getFileTree().addFile(new BGImage(f.getAbsolutePath()));
+                            }
+                            else if(FilenameUtils.getExtension(f.getName()).equals("4")) {
+                                File dir = f.getParentFile();
+                                File[] swrdFileList = dir.listFiles();
+                                for(File file: swrdFileList)
+                                {
+                                    if(file.length() == 768){
+                                        MainWindow.this.getFileTree().addFile(new SWRDImage(f.getAbsolutePath(), new Palette256(file.getAbsolutePath())));
+                                    }
+                                }
+                                
+                                
                             }
                         }
                     }

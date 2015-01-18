@@ -5,8 +5,8 @@ import java.awt.image.BufferedImage;
 import org.apache.log4j.Logger;
 
 import com.kelmer.core.fm.IFileManipulator;
-import com.kelmer.core.image.RGBPixel;
-import com.kelmer.formats.resource.image.ImageResource;
+import com.kelmer.formats.resource.image.core.ImageResource;
+import com.kelmer.formats.resource.image.core.RGBPixel;
 
 /**
  * The Last Express BG Image format.

@@ -49,6 +49,10 @@ public abstract class AnyFile {
     }
 
     
+    public AnyFile() {
+        super();
+    }
+
     public String[] getAffectedGames() {
         return affectedGames;
     }

@@ -15,7 +15,7 @@ import swing2swt.layout.BorderLayout;
 
 import com.kelmer.formats.AnyFile;
 import com.kelmer.formats.FileTypes;
-import com.kelmer.formats.resource.image.ImageResource;
+import com.kelmer.formats.resource.image.core.ImageResource;
 import com.kelmer.view.imageViewer.ImageViewerPanel;
 
 public class FileTree extends Tree {

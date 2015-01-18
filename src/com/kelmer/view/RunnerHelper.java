@@ -9,7 +9,7 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 
-import com.kelmer.formats.resource.image.ImageResource;
+import com.kelmer.formats.resource.image.core.ImageResource;
 import com.kelmer.formats.resource.image.holmes.rrm.RRMImage;
 
 public class RunnerHelper {

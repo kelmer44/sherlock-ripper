@@ -1,4 +1,4 @@
-package com.kelmer.formats.resource.image;
+package com.kelmer.formats.resource.image.core;
 
 import java.awt.image.BufferedImage;
 import java.awt.image.ComponentColorModel;

@@ -12,7 +12,7 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Label;
 
-import com.kelmer.formats.resource.image.ImageResource;
+import com.kelmer.formats.resource.image.core.ImageResource;
 
 public class ImageViewerPanel extends Composite {
 

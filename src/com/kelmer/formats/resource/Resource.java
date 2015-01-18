@@ -12,5 +12,9 @@ public abstract class Resource extends AnyFile {
     public Resource(IFileManipulator raf) {
         super(raf);
     }
+
+    public Resource() {
+        super();
+    }
     
 }

@@ -1,4 +1,4 @@
-package com.kelmer.core.image;
+package com.kelmer.formats.resource.image.core;
 
 public class RGBAPixel extends RGBPixel {
 

@@ -4,12 +4,12 @@ import java.awt.image.BufferedImage;
 
 import org.eclipse.swt.graphics.ImageData;
 
-import com.kelmer.core.image.RGBPixel;
-import com.kelmer.formats.resource.image.PalettedImageResource;
+import com.kelmer.formats.resource.image.core.PalettedImageResource;
+import com.kelmer.formats.resource.image.core.RGBPixel;
+import com.kelmer.formats.resource.palette.Palette256;
 
-public class RRMImage extends PalettedImageResource<RGBPixel, RGBPixel> {
+public class RRMImage extends PalettedImageResource<RGBPixel, Palette256> {
 
-    private static final int PALETTE_SIZE = 256;
     /**
      * Size is fixed
      */
@@ -17,11 +17,7 @@ public class RRMImage extends PalettedImageResource<RGBPixel, RGBPixel> {
     private static final int HEIGHT = 138;
     private static final int BPP = 8;
 
-    private int paletteSize = PALETTE_SIZE * 3;
-    /**
-     * Since Java cannot hold unsigned byte, we must use short...
-     */
-    public short[] rawPixels;
+
 
     public RRMImage(String filePath) {
         super(filePath);
@@ -29,7 +25,7 @@ public class RRMImage extends PalettedImageResource<RGBPixel, RGBPixel> {
         this.width = WIDTH;
         this.height = HEIGHT;
         this.bpp = BPP;
-        this.palette = new RGBPixel[PALETTE_SIZE];
+        this.palette = new Palette256();
         this.rawPixels = new short[width * height];
         this.pixels = new RGBPixel[width][height];
 
@@ -44,7 +40,7 @@ public class RRMImage extends PalettedImageResource<RGBPixel, RGBPixel> {
         rawPixels = fm.readUByte(rawPixels.length);
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++) {
-                pixels[i][j] = palette[rawPixels[j * width + i]];
+                pixels[i][j] = palette.getColor(rawPixels[j * width + i]);
             }
         }
     }
@@ -58,12 +54,13 @@ public class RRMImage extends PalettedImageResource<RGBPixel, RGBPixel> {
      */
     private void readPalette() {
         
-        fm.rseek(width * height + paletteSize);
+        fm.rseek(width * height + Palette256.PALETTE_BYTE_SIZE);
         for (int i = 0; i < 256; i++) {
-            palette[i] = new RGBPixel();
-            palette[i].r = fm.readUByte();
-            palette[i].g = fm.readUByte();
-            palette[i].b = fm.readUByte();
+            RGBPixel pixel = new RGBPixel();
+            pixel.r = fm.readUByte();
+            pixel.g = fm.readUByte();
+            pixel.b = fm.readUByte();
+            palette.setColor(i, pixel);
         }
     }
 
