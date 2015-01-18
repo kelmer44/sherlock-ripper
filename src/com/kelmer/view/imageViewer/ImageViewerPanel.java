@@ -5,30 +5,28 @@ import java.awt.image.BufferedImage;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.ImageData;
+import org.eclipse.swt.layout.GridData;
+import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Label;
 
 import com.kelmer.formats.resource.image.ImageResource;
-import org.eclipse.swt.layout.RowLayout;
-import org.eclipse.swt.layout.FillLayout;
-import org.eclipse.swt.widgets.Button;
-import org.eclipse.swt.layout.GridLayout;
-import org.eclipse.swt.layout.GridData;
 
 public class ImageViewerPanel extends Composite {
 
     private Label imageLabel;
 
     public ImageViewerPanel(Composite parent, int style) {
-        super(parent, style);
+        super(parent, SWT.BORDER);
         initComponents();
     }
 
     public void initComponents() {
         setLayout(new GridLayout(2, false));
         imageLabel = new Label(this, SWT.BORDER);
-        imageLabel.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, true, true, 1, 1));
+        imageLabel.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
         imageLabel.setText("New Label");
         
         Composite composite = new Composite(this, SWT.NONE);
@@ -46,6 +44,8 @@ public class ImageViewerPanel extends Composite {
         Button btnZoomX = new Button(composite, SWT.NONE);
         btnZoomX.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
         btnZoomX.setText("Zoom x2");
+        new Label(this, SWT.NONE);
+        new Label(this, SWT.NONE);
 
     }
 
@@ -62,5 +62,6 @@ public class ImageViewerPanel extends Composite {
         
         ImageData convertToSWT = ImageResource.convertToSWT(image);
         this.imageLabel.setImage(new Image(Display.getCurrent(), convertToSWT));
+        this.imageLabel.setSize(image.getWidth(), image.getHeight());
     }
 }

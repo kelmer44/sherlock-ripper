@@ -9,7 +9,8 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.graphics.Point;
-import org.eclipse.swt.layout.FillLayout;
+import org.eclipse.swt.layout.GridData;
+import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.DirectoryDialog;
 import org.eclipse.swt.widgets.Display;
@@ -80,7 +81,7 @@ public class MainWindow {
         shell.setMinimumSize(new Point(800, 600));
         shell.setSize(450, 300);
         shell.setText("SWT Application");
-        shell.setLayout(new BorderLayout(0, 0));
+        shell.setLayout(new BorderLayout(6, 0));
 
 
         createMenu();
@@ -90,6 +91,8 @@ public class MainWindow {
         createContent();
 
         fileTree = new FileTree(shell, SWT.BORDER, imageViewer);
+        fileTree.setHeaderVisible(true);
+        fileTree.setLinesVisible(true);
     }
 
     public FileTree getFileTree() {
@@ -118,11 +121,16 @@ public class MainWindow {
 
     private void createContent() {
         contentPanel = new Composite(shell, SWT.NONE);
-        contentPanel.setLayout(new FillLayout(SWT.VERTICAL));
+        contentPanel.setLayoutData(BorderLayout.CENTER);
+        contentPanel.setLayout(new GridLayout(1, false));
 
         imageViewer = new ImageViewerPanel(contentPanel, SWT.NONE);
-        imageViewer.setLayout(new FillLayout(SWT.HORIZONTAL));
+        GridData gridData = (GridData) imageViewer.getImageLabel().getLayoutData();
+        gridData.grabExcessVerticalSpace = false;
+        gridData.grabExcessHorizontalSpace = false;
+        imageViewer.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
         navButtonBar = new NavigationButtonBar(contentPanel, SWT.NONE);
+        navButtonBar.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, true, false, 1, 1));
     }
 
     private void createMenu() {
